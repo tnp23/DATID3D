@@ -310,6 +310,7 @@ if args.mode == 'image':
     --shape_format={args.shape_format} \
     --shape_only_first={args.shape_only_first} \
     --trunc={args.trunc} \
+    --yaw={args.yaw_range}
     """
     print(f"{command} \n")
     os.system(command)
@@ -332,7 +333,8 @@ if args.mode == 'video':
     --outdir={opj('..', video_path)} \
     --shapes=False \
     --trunc={args.trunc} \
-    --grid={args.grid}
+    --grid={args.grid} \
+    --yaw={args.yaw_range} \
     """
     print(f"{command} \n")
     os.system(command)
