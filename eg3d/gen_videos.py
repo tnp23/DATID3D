@@ -255,7 +255,6 @@ def parse_tuple(s: Union[str, Tuple[int,int]]) -> Tuple[int, int]:
 @click.option('--model_is_state_dict', type=bool, default=False)
 @click.option('--seeds', type=parse_range, help='List of random seeds', required=True)
 @click.option('--shuffle-seed', type=int, help='Random seed to use for shuffling seed order', default=None)
-@click.option('--yaw-range', type=float, help='yaw range for the camera', default=None)
 @click.option('--grid', type=parse_tuple, help='Grid width/height, e.g. \'4x3\' (default: 1x1)', default=(1,1))
 @click.option('--num-keyframes', type=int, help='Number of seeds to interpolate through.  If not specified, determine based on the length of the seeds array given by --seeds.', default=None)
 @click.option('--w-frames', type=int, help='Number of frames to interpolate between latents', default=120)
@@ -284,7 +283,6 @@ def generate_images(
     nrr: Optional[int],
     shapes: bool,
     model_is_state_dict: bool,
-    yaw_range: float,
 ):
 
     if not os.path.exists(outdir):
@@ -354,7 +352,7 @@ def generate_images(
                              w_frames=w_frames,
                              seeds=seeds, shuffle_seed=shuffle_seed, psi=truncation_psi,
                              truncation_cutoff=truncation_cutoff, generator_type=generator_type, image_mode=image_mode,
-                             gen_shapes=shapes, yaw_range=yaw_range)
+                             gen_shapes=shapes)
 
         else:
             output = output + f'__{seed_idx}.mp4'
@@ -362,7 +360,7 @@ def generate_images(
                              w_frames=w_frames,
                              seeds=seeds, shuffle_seed=shuffle_seed, psi=truncation_psi,
                              truncation_cutoff=truncation_cutoff, generator_type=generator_type, image_mode=image_mode,
-                             gen_shapes=shapes, yaw_range=yaw_range)
+                             gen_shapes=shapes)
 
 
 #----------------------------------------------------------------------------
