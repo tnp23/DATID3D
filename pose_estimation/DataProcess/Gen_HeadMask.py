@@ -11,6 +11,7 @@ import numpy as np
 from glob import glob
 from correct_head_mask import correct_hair_mask
 import argparse
+import os
 
 
 class GenHeadMask(object):
@@ -42,7 +43,8 @@ class GenHeadMask(object):
         
         
     def main_process(self, img_dir):
-        img_path_list = [x for x in glob(f"{0}/*.png".format(img_dir)) if "mask" not in x]
+        print("DATASET" + str(len(glob(os.path.join(img_dir, "*.png")))))
+        img_path_list = [x for x in glob(os.path.join(img_dir, "*.png")) if "mask" not in x]
         img_path_list = img_path_list + [x for x in glob(f"{0}/*.jpg".format(img_dir)) if "mask" not in x]
         if len(img_path_list) == 0:
             print("Dir: %s does include any .png and .jpg images." % img_dir)
