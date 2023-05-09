@@ -71,7 +71,7 @@ def create_samples(N=256, voxel_origin=[0, 0, 0], cube_length=2.0):
 
 #----------------------------------------------------------------------------
 
-def gen_interp_video(G, w_given, mp4: str, seeds, shuffle_seed=None, w_frames=60*4, kind='cubic', grid_dims=(1,1), num_keyframes=None, wraps=2, psi=1., truncation_cutoff=14, generator_type='ffhq', image_mode='image', gen_shapes=False, device=torch.device('cuda'), **video_kwargs):
+def gen_interp_video(G, w_given, mp4: str, seeds, shuffle_seed=None, yaw=0.4, w_frames=60*4, kind='cubic', grid_dims=(1,1), num_keyframes=None, wraps=2, psi=1., truncation_cutoff=14, generator_type='ffhq', image_mode='image', gen_shapes=False, device=torch.device('cuda'), **video_kwargs):
     grid_w = grid_dims[0]
     grid_h = grid_dims[1]
 
@@ -130,7 +130,7 @@ def gen_interp_video(G, w_given, mp4: str, seeds, shuffle_seed=None, w_frames=60
         for yi in range(grid_h):
             for xi in range(grid_w):
                 pitch_range = 0.25
-                yaw_range = 0.35
+                yaw_range = yaw
                 cam2world_pose = LookAtPoseSampler.sample(3.14/2 + yaw_range * np.sin(2 * 3.14 * frame_idx / (num_keyframes * w_frames)),
                                                         3.14/2 -0.05 + pitch_range * np.cos(2 * 3.14 * frame_idx / (num_keyframes * w_frames)),
                                                         camera_lookat_point, radius=G.rendering_kwargs['avg_camera_radius'], device=device)
@@ -255,6 +255,7 @@ def parse_tuple(s: Union[str, Tuple[int,int]]) -> Tuple[int, int]:
 @click.option('--model_is_state_dict', type=bool, default=False)
 @click.option('--seeds', type=parse_range, help='List of random seeds', required=True)
 @click.option('--shuffle-seed', type=int, help='Random seed to use for shuffling seed order', default=None)
+@click.option('--yaw', type=float, help='Yaw range', default=0.4)
 @click.option('--grid', type=parse_tuple, help='Grid width/height, e.g. \'4x3\' (default: 1x1)', default=(1,1))
 @click.option('--num-keyframes', type=int, help='Number of seeds to interpolate through.  If not specified, determine based on the length of the seeds array given by --seeds.', default=None)
 @click.option('--w-frames', type=int, help='Number of frames to interpolate between latents', default=120)
@@ -283,6 +284,7 @@ def generate_images(
     nrr: Optional[int],
     shapes: bool,
     model_is_state_dict: bool,
+    yaw: float
 ):
 
     if not os.path.exists(outdir):
@@ -349,6 +351,7 @@ def generate_images(
             w_given_id = os.path.split(w_pth)[-1].split('.')[-2]
             output = output + f'__{w_given_id}.mp4'
             gen_interp_video(G=G, w_given=w_given, mp4=output, bitrate='10M', grid_dims=grid, num_keyframes=num_keyframes,
+                             yaw=yaw,
                              w_frames=w_frames,
                              seeds=seeds, shuffle_seed=shuffle_seed, psi=truncation_psi,
                              truncation_cutoff=truncation_cutoff, generator_type=generator_type, image_mode=image_mode,
@@ -357,6 +360,7 @@ def generate_images(
         else:
             output = output + f'__{seed_idx}.mp4'
             gen_interp_video(G=G, w_given=None, mp4=output, bitrate='10M', grid_dims=grid, num_keyframes=num_keyframes,
+                             yaw=yaw,
                              w_frames=w_frames,
                              seeds=seeds, shuffle_seed=shuffle_seed, psi=truncation_psi,
                              truncation_cutoff=truncation_cutoff, generator_type=generator_type, image_mode=image_mode,

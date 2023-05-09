@@ -104,6 +104,7 @@ def create_samples(N=256, voxel_origin=[0, 0, 0], cube_length=2.0):
 
 @click.command()
 @click.option('--network', help='Network path', multiple=True, required=True)
+@click.option('--yaw', type=float, help='Yaw range', default=0.4)
 @click.option('--w_pth', help='latent path')
 @click.option('--generator_type', help='Generator type', type=click.Choice(['ffhq', 'cat']), required=False, metavar='STR', default='ffhq', show_default=True)
 @click.option('--model_is_state_dict', type=bool, default=False)
@@ -130,6 +131,7 @@ def generate_images(
     shape_format: str,
     model_is_state_dict: bool,
     shape_only_first: bool,
+    yaw: float
 ):
 
 
@@ -199,7 +201,7 @@ def generate_images(
 
             imgs = []
             angle_p = -0.2
-            for angle_y, angle_p in [(.4, angle_p), (0, angle_p), (-.4, angle_p)]:
+            for angle_y, angle_p in [(yaw, angle_p), (0, angle_p), (-yaw, angle_p)]:
                 cam_pivot = torch.tensor(G.rendering_kwargs.get('avg_camera_pivot', [0, 0, 0]), device=device)
                 cam_radius = G.rendering_kwargs.get('avg_camera_radius', 2.7)
                 cam2world_pose = LookAtPoseSampler.sample(np.pi/2 + angle_y, np.pi/2 + angle_p, cam_pivot, radius=cam_radius, device=device)
