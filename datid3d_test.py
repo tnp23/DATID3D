@@ -427,6 +427,7 @@ if args.mode == 'manip':
         --shape_format={args.shape_format} \
         --shape_only_first={args.shape_only_first} \
         --trunc={args.trunc} \
+        --yaw={args.yaw_range} \
         """
         print(f"{command} \n")
         os.system(command)
@@ -439,6 +440,7 @@ if args.mode == 'manip':
         --outdir={opj('..', manip_path)} \
         --shapes=False \
         --trunc={args.trunc} \
+        --yaw={args.yaw_range} \
         --grid=1x1 
         """
         print(f"{command} \n")
@@ -482,6 +484,7 @@ if args.mode == 'manip_from_inv':
         --shape_format={args.shape_format} \
         --shape_only_first={args.shape_only_first} \
         --trunc={args.trunc} \
+        --yaw={args.yaw_range} \
         """
         print(f"{command} \n")
         os.system(command)
@@ -494,6 +497,7 @@ if args.mode == 'manip_from_inv':
         --outdir={opj('..', manip_path)} \
         --shapes=False \
         --trunc={args.trunc} \
+        --yaw={args.yaw_range} \
         --grid=1x1 
         """
         print(f"{command} \n")
