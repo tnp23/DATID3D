@@ -111,7 +111,7 @@ if __name__ == '__main__':
         cropping_params = json.load(f)
 
     os.makedirs(args.outdir, exist_ok=True)
-    print('hooray_debug')
+    print('hooray_debug' + args.indir)
     for im_path, cropping_dict in tqdm(cropping_params.items()):
         print('hooray')
         print(im_path)
