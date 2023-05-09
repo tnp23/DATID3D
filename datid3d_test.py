@@ -281,7 +281,7 @@ parser.add_argument('--shape_format',  type=str, choices=['.mrc', '.ply'], defau
 parser.add_argument('--shape_only_first', type=bool, default=False)
 # Sample pose-controlled videos
 parser.add_argument('--grid', default='1x1')
-parser.add_argument('--yaw_range', default=0.4, type=int)
+parser.add_argument('--yaw_range', default=0.4, type=float)
 
 
 args = parser.parse_args()
