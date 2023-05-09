@@ -113,6 +113,8 @@ if __name__ == '__main__':
     os.makedirs(args.outdir, exist_ok=True)
 
     for im_path, cropping_dict in tqdm(cropping_params.items()):
+        print('hooray')
+        print(im_path)
         im = Image.open(os.path.join(args.indir, im_path)).convert('RGB')
 
         _, H = im.size
