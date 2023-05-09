@@ -107,7 +107,7 @@ if __name__ == '__main__':
     parser.add_argument('--compress_level', type=int, default=0)
     args = parser.parse_args()
 
-    with open(os.path.join(args.indir, 'cropping_params.json')) as f:
+    with open(os.path.join(args.indir,'epoch_20_000000', 'cropping_params.json')) as f:
         cropping_params = json.load(f)
 
     os.makedirs(args.outdir, exist_ok=True)
