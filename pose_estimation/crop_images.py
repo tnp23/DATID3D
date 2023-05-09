@@ -108,6 +108,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     with open(os.path.join(args.indir,'epoch_20_000000', 'cropping_params.json')) as f:
+
         cropping_params = json.load(f)
 
     os.makedirs(args.outdir, exist_ok=True)
