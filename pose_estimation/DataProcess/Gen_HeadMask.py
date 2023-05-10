@@ -43,10 +43,15 @@ class GenHeadMask(object):
         
         
     def main_process(self, img_dir):
+<<<<<<< HEAD
         print("DATASET" + str(len(glob(os.path.join(img_dir, "*.png")))))
         print("PATH" + img_dir)
         img_path_list = [x for x in glob(os.path.join(img_dir, "*.png")) if "mask" not in x]
         img_path_list = img_path_list + [x for x in glob(f"{0}/*.jpg".format(img_dir)) if "mask" not in x]
+=======
+        img_path_list = [x for x in glob("%s/*.png" % img_dir) if "mask" not in x]  
+        img_path_list = img_path_list + [x for x in glob("%s/*.jpg" % img_dir) if "mask" not in x]  
+>>>>>>> parent of 5b47bca (Fix file path)
         if len(img_path_list) == 0:
             print("Dir: %s does include any .png and .jpg images." % img_dir)
             exit(0)
