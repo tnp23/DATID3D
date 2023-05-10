@@ -305,6 +305,7 @@ if args.mode == 'image':
     {network_command} \
     --seeds={args.seeds}  \
     --generator_type={args.generator_type} \
+    --yaw={args.yaw_range} \
     --outdir={opj('..', image_path)} \
     --shapes={args.shape} \
     --shape_format={args.shape_format} \
@@ -330,6 +331,7 @@ if args.mode == 'video':
     {network_command} \
     --seeds={args.seeds} \
     --generator_type={args.generator_type} \
+    --yaw={args.yaw_range} \
     --outdir={opj('..', video_path)} \
     --shapes=False \
     --trunc={args.trunc} \
@@ -428,6 +430,7 @@ if args.mode == 'manip':
         --shape_format={args.shape_format} \
         --shape_only_first={args.shape_only_first} \
         --trunc={args.trunc} \
+        --yaw={args.yaw_range} \
         """
         print(f"{command} \n")
         os.system(command)
@@ -440,6 +443,7 @@ if args.mode == 'manip':
         --outdir={opj('..', manip_path)} \
         --shapes=False \
         --trunc={args.trunc} \
+        --yaw={args.yaw_range} \
         --grid=1x1 
         """
         print(f"{command} \n")
@@ -477,6 +481,7 @@ if args.mode == 'manip_from_inv':
          {network_command} \
         --w_pth={w_pth} \
         --seeds='100-200' \
+        --yaw={args.yaw_range} \
         --generator_type={args.generator_type} \
         --outdir={opj('..', manip_path)} \
         --shapes={args.shape} \
@@ -492,6 +497,7 @@ if args.mode == 'manip_from_inv':
         --w_pth={w_pth} \
         --seeds='100-200' \
         --generator_type={args.generator_type} \
+        --yaw={args.yaw_range} \
         --outdir={opj('..', manip_path)} \
         --shapes=False \
         --trunc={args.trunc} \
