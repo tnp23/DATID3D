@@ -388,12 +388,10 @@ if args.mode == 'manip':
             drive_download(f'https://drive.google.com/uc?id=1zawY7jYDJlUGnSAXn1pgIHgIvJpiSmj5', './checkpoints/pretrained/epoch_20.pth', quiet=False)
 
         print()
-    # command =  f"""python extract_pose.py 0 \
-    # {opj('..', input_path)} {opj('..', align_path)} {opj('..', pose_path)}
-    # """
     command =  f"""python extract_pose.py 0 \
-    {input_path} {opj('..', align_path)} {opj('..', pose_path)}
+    {opj('..', input_path)} {opj('..', align_path)} {opj('..', pose_path)}
     """
+
     print(f"{command} \n")
     os.system(command)
     os.chdir('..')
