@@ -107,14 +107,12 @@ if __name__ == '__main__':
     parser.add_argument('--compress_level', type=int, default=0)
     args = parser.parse_args()
 
-    with open(os.path.join(args.indir,'cropping_params.json')) as f:
+    with open(os.path.join(args.indir, 'cropping_params.json')) as f:
         cropping_params = json.load(f)
 
     os.makedirs(args.outdir, exist_ok=True)
-    print('hooray_debug' + args.indir)
+
     for im_path, cropping_dict in tqdm(cropping_params.items()):
-        print('hooray')
-        print(im_path)
         im = Image.open(os.path.join(args.indir, im_path)).convert('RGB')
 
         _, H = im.size

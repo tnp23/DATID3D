@@ -32,7 +32,6 @@ subprocess.run([cmd], shell=True, check=True)
 
 # Perform final cropping of 1024x1024 images.
 print("Processing final crops...")
-print(os.getcwd())
 cmd = "python crop_images.py"
 input_flag = " --indir " + args.input_dir
 output_flag = " --outdir " + os.path.join(args.input_dir, 'cropped_images')
